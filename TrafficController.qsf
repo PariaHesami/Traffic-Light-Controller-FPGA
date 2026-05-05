@@ -1,0 +1,104 @@
+###############################################################
+# DE10-Lite QSF for TrafficController
+# Device: 10M50DAF484C7G (MAX 10 FPGA)
+###############################################################
+
+set_global_assignment -name TOP_LEVEL_ENTITY TrafficController
+
+###############################################################
+# DEVICE SELECTION (must match DE10-Lite)
+###############################################################
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M50DAF484C7G
+
+###############################################################
+# CLOCK INPUT (CLOCK_50)
+# DE10-Lite User Manual: 50 MHz clock = PIN_P11
+###############################################################
+set_location_assignment PIN_P11 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
+
+###############################################################
+# PUSHBUTTONS (KEY[0], KEY[1])  -- match Verilog port names
+# DE10-Lite:
+#   KEY[0] (KEY0 button) -> PIN_B8
+#   KEY[1] (KEY1 button) -> PIN_A7
+###############################################################
+set_location_assignment PIN_B8 -to KEY[0]
+set_location_assignment PIN_A7 -to KEY[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[1]
+
+###############################################################
+# LEDR[9:0]
+# DE10-Lite LED mapping:
+#   LEDR0  PIN_A8
+#   LEDR1  PIN_A9
+#   LEDR2  PIN_A10
+#   LEDR3  PIN_B10
+#   LEDR4  PIN_D13
+#   LEDR5  PIN_C13
+#   LEDR6  PIN_E14
+#   LEDR7  PIN_D14
+#   LEDR8  PIN_A11
+#   LEDR9  PIN_B11
+###############################################################
+set_location_assignment PIN_A8  -to LEDR[0]
+set_location_assignment PIN_A9  -to LEDR[1]
+set_location_assignment PIN_A10 -to LEDR[2]
+set_location_assignment PIN_B10 -to LEDR[3]
+set_location_assignment PIN_D13 -to LEDR[4]
+set_location_assignment PIN_C13 -to LEDR[5]
+set_location_assignment PIN_E14 -to LEDR[6]
+set_location_assignment PIN_D14 -to LEDR[7]
+set_location_assignment PIN_A11 -to LEDR[8]
+set_location_assignment PIN_B11 -to LEDR[9]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[9]
+
+###############################################################
+# HEX0[6:0] (Seven-segment display)
+# DE10-Lite HEX0 pinout:
+#   HEX0[0] (a) -> PIN_C14
+#   HEX0[1] (b) -> PIN_E15
+#   HEX0[2] (c) -> PIN_C15
+#   HEX0[3] (d) -> PIN_C16
+#   HEX0[4] (e) -> PIN_E16
+#   HEX0[5] (f) -> PIN_D17
+#   HEX0[6] (g) -> PIN_C17
+###############################################################
+set_location_assignment PIN_C14 -to HEX0[0]
+set_location_assignment PIN_E15 -to HEX0[1]
+set_location_assignment PIN_C15 -to HEX0[2]
+set_location_assignment PIN_C16 -to HEX0[3]
+set_location_assignment PIN_E16 -to HEX0[4]
+set_location_assignment PIN_D17 -to HEX0[5]
+set_location_assignment PIN_C17 -to HEX0[6]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[6]
+
+###############################################################
+# Compile optimization: use all cores
+###############################################################
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 14
+
+set_global_assignment -name LAST_QUARTUS_VERSION "24.1std.0 Lite Edition"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
